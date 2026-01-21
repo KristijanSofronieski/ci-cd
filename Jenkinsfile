@@ -2,12 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Deploy to Server') {
+        stage('Checkout') {
             steps {
-                // 'ubuntu' is the name of your credential ID in Jenkins
-                sshagent(['ubuntu']) {
-                    sh "rsync -avz -e 'ssh -o StrictHostKeyChecking=no' . ubuntu@172.29.80.1:/home/Kris/my-project"
-                }
+                // This pulls your code from GitHub
+                checkout scm
+            }
+        }
+        stage('Deploy Locally') {
+            steps {
+                // This creates a folder inside Jenkins and moves your index.html there
+                sh 'mkdir -p /var/jenkins_home/deployed_site'
+                sh 'rsync -avz index.html /var/jenkins_home/deployed_site/'
+                echo 'Successfully moved index.html to the local deployment folder!'
+            }
+        }
+        stage('Verify') {
+            steps {
+                // This proves the file actually made it there
+                sh 'ls -la /var/jenkins_home/deployed_site'
+                sh 'cat /var/jenkins_home/deployed_site/index.html'
             }
         }
     }
