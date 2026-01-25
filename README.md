@@ -1,7 +1,7 @@
 #  Automated CI/CD Pipeline Proof of Concept
 
 ##  Project Overview
-This project demonstrates a fully automated **CI/CD (Continuous Integration / Continuous Deployment)** pipeline. The goal was to eliminate manual file transfers by creating a system where code changes are automatically detected and deployed.
+This project displays a fully automated **CI/CD (Continuous Integration / Continuous Deployment)** pipeline. The goal was to remove manual file transfers by creating a system where code changes are automatically detected and deployed.
 
 ##  Tools Used
 * **Docker**: Stores the Jenkins environment in an isolated container.
@@ -12,6 +12,6 @@ This project demonstrates a fully automated **CI/CD (Continuous Integration / Co
 ##  The Flow
 1. **Commit**: A developer makes changes to `index.html` on GitHub.
 2. **Poll SCM**: Jenkins checks GitHub every minute for updates.
-3. **Build**: Jenkins pulls the latest code and executes the `Jenkinsfile`.
+3. **Build**: Jenkins runs the latest code and executes the `Jenkinsfile`.
 4. **Deploy**: The file is moved to the production folder on the server using `rsync`.
 
